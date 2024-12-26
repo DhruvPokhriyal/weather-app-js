@@ -122,6 +122,20 @@ body {
 
 .left-section {
     grid-area: main;
+    font-size: 47px;
+    display: grid;
+    justify-content: center;
+    /* align-items: center; */
+    grid-template-rows: 2fr 1fr 2fr;
+}
+
+.icon {
+    display: grid;
+    justify-content: center;
+}
+
+.temp {
+    text-align: center;
 }
 
 .right-section {
