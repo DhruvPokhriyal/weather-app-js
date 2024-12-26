@@ -79,10 +79,10 @@ body {
 
 .main {
     position: relative;
-    height: 100vh;
     width: 100%;
+    height: 100vh;
     display: grid;
-    grid-template-rows: 1fr 9fr;
+    grid-template-rows: auto 1fr;
     grid-template-columns: 1fr 3fr;
     grid-template-areas:
         "units units"
@@ -123,11 +123,11 @@ body {
 
 .left-section {
     grid-area: main;
-    font-size: 47px;
+    font-size: 40px;
     display: grid;
     justify-content: center;
-    /* align-items: center; */
     grid-template-rows: 2fr 1fr 2fr;
+    height: 100%;
 }
 
 .icon {
@@ -143,14 +143,42 @@ body {
     height: inherit;
     grid-area: details;
     display: grid;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    /* justify-content: center; */
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    grid-template-rows: repeat(3, minmax(100px, 1fr));
+    grid-template-areas:
+        "max min"
+        "feelsLike dew"
+        "humidity precipitation";
     font-size: 40px;
+    margin-top: -20px;
+}
+
+.max-temp {
+    grid-area: max;
+}
+
+.min-temp {
+    grid-area: min;
+}
+
+.feels-like {
+    grid-area: feelsLike;
+}
+
+.dew {
+    grid-area: dew;
+}
+
+.humidity {
+    grid-area: humidity;
+}
+
+.precipitation {
+    grid-area: precipitation;
 }
 
 .right-section > div {
-    height: 150px;
     width: auto;
     display: flex;
     flex-direction: column;
