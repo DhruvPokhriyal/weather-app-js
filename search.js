@@ -51,17 +51,21 @@ function weatherInfoDom(
     const precipitationNode = document.querySelector(".precipitation p");
     const iconNode = document.querySelector(".icon img");
     const conditionNode = document.querySelector(".weather-type");
-    tempNode.textContent = temp + degreeFahr;
-    maxTempNode.textContent = maxTemp + degreeFahr;
-    minTempNode.textContent = minTemp + degreeFahr;
-    feelsLikeNode.textContent = feelsLike + degreeFahr;
-    dewNode.textContent = dew + degreeFahr;
     humidityNode.textContent = `${humidity} %`;
     precipitationNode.textContent = precipitation
         ? `${precipitation} inches`
         : "0 inches";
     iconNode.src = `./assets/images/icons/${icon}.svg`;
     conditionNode.textContent = conditions;
+
+    function displayTemp(degreeUnit) {
+        tempNode.textContent = temp + degreeUnit;
+        maxTempNode.textContent = maxTemp + degreeUnit;
+        minTempNode.textContent = minTemp + degreeUnit;
+        feelsLikeNode.textContent = feelsLike + degreeUnit;
+        dewNode.textContent = dew + degreeUnit;
+    }
+
     function configureButton(button, toUnit, degreeUnit) {
         button.addEventListener("change", () => {
             temp = toUnit(temp);
@@ -69,13 +73,10 @@ function weatherInfoDom(
             minTemp = toUnit(minTemp);
             feelsLike = toUnit(feelsLike);
             dew = toUnit(dew);
-            tempNode.textContent = temp + degreeUnit;
-            maxTempNode.textContent = maxTemp + degreeUnit;
-            minTempNode.textContent = minTemp + degreeUnit;
-            feelsLikeNode.textContent = feelsLike + degreeUnit;
-            dewNode.textContent = dew + degreeUnit;
+            displayTemp(degreeUnit);
         });
     }
+    displayTemp(degreeFahr);
     configureButton(celsButton, toCelsius, degreeCels);
     configureButton(fahrButton, toFahr, degreeFahr);
 }
