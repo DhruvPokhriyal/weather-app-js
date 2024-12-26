@@ -195,6 +195,11 @@ body {
     background-color: black;
     z-index: 2;
     display: none;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
 }
 
 .error-screen {

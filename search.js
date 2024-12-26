@@ -2,8 +2,76 @@ const API_KEY = "J4BL7R2WRB5A6KFZK64VGDPLN";
 const params = new URLSearchParams(window.location.search);
 const search = params.get("searchbar");
 
+class Timer {
+    constructor() {
+        this.isRunning = false;
+        this.startTime = 0;
+        this.overallTime = 0;
+    }
+
+    _getTimeElapsedSinceLastStart() {
+        if (!this.startTime) {
+            return 0;
+        }
+
+        return Date.now() - this.startTime;
+    }
+
+    start() {
+        if (this.isRunning) {
+            return console.error("Timer is already running");
+        }
+
+        this.isRunning = true;
+
+        this.startTime = Date.now();
+    }
+
+    stop() {
+        if (!this.isRunning) {
+            return console.error("Timer is already stopped");
+        }
+
+        this.isRunning = false;
+
+        this.overallTime =
+            this.overallTime + this._getTimeElapsedSinceLastStart();
+    }
+
+    reset() {
+        this.overallTime = 0;
+
+        if (this.isRunning) {
+            this.startTime = Date.now();
+            return;
+        }
+
+        this.startTime = 0;
+    }
+
+    getTime() {
+        if (!this.startTime) {
+            return 0;
+        }
+
+        if (this.isRunning) {
+            return this.overallTime + this._getTimeElapsedSinceLastStart();
+        }
+
+        return this.overallTime;
+    }
+}
+
+const timer = new Timer();
+setInterval(() => {
+    const timeInSeconds = Math.round(timer.getTime() / 1000);
+    document.getElementById("time").innerText = timeInSeconds;
+}, 100);
+
 const errorScreen = document.querySelector(".error-screen");
 const errorMessage = document.querySelector(".error-screen h1");
+
+const loadingScreen = document.querySelector(".loading-screen");
 
 const degreeCels = "\u00B0C";
 const degreeFahr = "\u00B0F";
@@ -75,8 +143,14 @@ function weatherInfoDom(
     configureButton(fahrButton, toFahr, degreeFahr);
 }
 
-function callLoadingScreen() {}
-function removeLoadingScreen() {}
+function callLoadingScreen() {
+    loadingScreen.classList.add("show");
+    timer.start();
+}
+function removeLoadingScreen() {
+    timer.stop();
+    loadingScreen.classList.remove("show");
+}
 
 async function getWeatherInfo() {
     try {
