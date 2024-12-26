@@ -61,6 +61,11 @@ h6 {
     isolation: isolate;
 }
 
+:root {
+    --font-col: black;
+}
+
 body {
-    background-image: url("./assets/images/search-bg.jpg");
+    background-image: url("./assets/images/light-bg-search.jpg");
+    /* background-image: url("./assets/images/search-bg.jpg"); */
 }
