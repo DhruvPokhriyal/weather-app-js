@@ -74,6 +74,7 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings: "slnt" 0;
+    overflow: hidden;
 }
 
 .main {
@@ -139,5 +140,20 @@ body {
 }
 
 .right-section {
+    height: inherit;
     grid-area: details;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    font-size: 40px;
+}
+
+.right-section > div {
+    height: 150px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
