@@ -2,6 +2,8 @@ const API_KEY = "J4BL7R2WRB5A6KFZK64VGDPLN";
 const params = new URLSearchParams(window.location.search);
 const search = params.get("searchbar");
 
+const errorScreen = document.querySelector(".error-screen");
+
 const degreeCels = "\u00B0C";
 const degreeFahr = "\u00B0F";
 
@@ -46,6 +48,7 @@ function weatherInfoDom(
         ? `${precipitation} inches`
         : "0 inches";
     iconNode.src = `./assets/images/icons/${icon}.svg`;
+    iconNode.height = "200";
     conditionNode.textContent = conditions;
 
     function displayTemp(degreeUnit) {
@@ -77,29 +80,40 @@ function removeLoadingScreen() {}
 async function getWeatherInfo() {
     try {
         let response = await fetch(url);
-        let data = await response.json();
-        return data;
+        console.log(response.status);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            return;
+        } else {
+            let data = await response.json();
+            return data;
+        }
     } catch (err) {
         console.log(err);
     }
 }
 
 async function main() {
-    callLoadingScreen();
-    let data = await getWeatherInfo();
-    removeLoadingScreen();
-    console.log(data);
-    weatherInfoDom(
-        data.currentConditions.temp,
-        data.days[0]["tempmax"],
-        data.days[0]["tempmin"],
-        data.currentConditions.feelslike,
-        data.currentConditions.dew,
-        data.currentConditions.humidity,
-        data.currentConditions.precip,
-        data.currentConditions.icon,
-        data.currentConditions.conditions
-    );
+    try {
+        callLoadingScreen();
+        let data = await getWeatherInfo();
+        removeLoadingScreen();
+        console.log(data);
+        weatherInfoDom(
+            data.currentConditions.temp,
+            data.days[0]["tempmax"],
+            data.days[0]["tempmin"],
+            data.currentConditions.feelslike,
+            data.currentConditions.dew,
+            data.currentConditions.humidity,
+            data.currentConditions.precip,
+            data.currentConditions.icon,
+            data.currentConditions.conditions
+        );
+    } catch (err) {
+        console.log(err);
+        errorScreen.classList.add("show");
+    }
 }
 // Add some content for designing loading page here
 
