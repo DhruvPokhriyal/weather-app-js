@@ -21,16 +21,6 @@ function toFahr(temp) {
     return (temp * 1.8 + 32).toFixed(1);
 }
 
-async function getWeatherInfo() {
-    try {
-        let response = await fetch(url);
-        let data = await response.json();
-        return data;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
 function weatherInfoDom(
     temp,
     maxTemp,
@@ -84,6 +74,16 @@ function weatherInfoDom(
 function callLoadingScreen() {}
 function removeLoadingScreen() {}
 
+async function getWeatherInfo() {
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 async function main() {
     callLoadingScreen();
     let data = await getWeatherInfo();
@@ -108,5 +108,5 @@ main();
 
 // document.querySelector("body").textContent = search;
 
-//TODO: Loading Screen
+//TODO: Loading Screen (Optional)
 //TODO: Error Handling
