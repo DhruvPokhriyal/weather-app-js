@@ -107,3 +107,6 @@ async function main() {
 main();
 
 // document.querySelector("body").textContent = search;
+
+//TODO: Loading Screen
+//TODO: Error Handling
