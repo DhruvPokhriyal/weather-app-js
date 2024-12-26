@@ -3,6 +3,7 @@ const params = new URLSearchParams(window.location.search);
 const search = params.get("searchbar");
 
 const errorScreen = document.querySelector(".error-screen");
+const errorMessage = document.querySelector(".error-screen h1");
 
 const degreeCels = "\u00B0C";
 const degreeFahr = "\u00B0F";
@@ -82,6 +83,7 @@ async function getWeatherInfo() {
         let response = await fetch(url);
         console.log(response.status);
         if (!response.ok) {
+            errorMessage.textContent = `HTTP error! Status: ${response.status}`;
             throw new Error(`HTTP error! Status: ${response.status}`);
             return;
         } else {
