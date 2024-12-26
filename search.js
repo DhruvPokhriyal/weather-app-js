@@ -14,11 +14,11 @@ let curDate;
 let url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${search}/today?key=${API_KEY}`;
 
 function toCelsius(temp) {
-    return Math.round((temp - 32) * (5 / 9));
+    return ((temp - 32) * (5 / 9)).toFixed(1);
 }
 
 function toFahr(temp) {
-    return Math.round(temp * 1.8 + 32);
+    return (temp * 1.8 + 32).toFixed(1);
 }
 
 async function getWeatherInfo() {
