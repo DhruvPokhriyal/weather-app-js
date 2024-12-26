@@ -124,11 +124,12 @@ body {
 
 .left-section {
     grid-area: main;
-    font-size: 40px;
+    font-size: 35px;
     display: grid;
     justify-content: center;
-    grid-template-rows: 1fr 1fr 2fr;
+    grid-template-rows: 200px 200px 300px;
     height: 100%;
+    line-height: 1;
 }
 
 .icon {
